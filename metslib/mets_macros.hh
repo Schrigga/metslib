@@ -1,5 +1,5 @@
 #pragma once
 
 #ifndef UNUSED
-	#define UNUSED(x) 
+#define UNUSED(x)
 #endif

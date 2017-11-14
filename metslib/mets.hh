@@ -22,7 +22,7 @@
 /// @mainpage METSlib
 ///
 /// \image html http://www.coin-or.org/images/logo/COIN-OR_150.png
-/// 
+///
 /// @section Introduction
 ///
 /// This is a library implementing some neighborhood based
@@ -51,7 +51,7 @@
 /// decorators are provided with the library, some problems may need
 /// customary tabu lists, termination criterias, aspiration criteria,
 /// or cooling schedules.
-/// 
+///
 /// The framework you must implement your model into is made of:
 ///
 /// - mets::feasible_solution
@@ -135,11 +135,11 @@
 
 
 //________________________________________________________________________
-inline std::ostream& 
+inline std::ostream&
 operator<<(std::ostream& os, const mets::printable& p)
 {
-  p.print(os);
-  return os;
+    p.print(os);
+    return os;
 }
 
 #endif

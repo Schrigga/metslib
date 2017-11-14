@@ -1,0 +1,20 @@
+*.orig
+*_ah.hh
+
+# Dirs
+autom4te.cache
+m4
+test
+doxydoc
+
+# files
+Makefile
+Makefile.in
+config*
+configure
+_configs.sed
+aclocal.m4
+metslib.pc
+shave
+stamp-h1
+
