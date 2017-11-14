@@ -22,6 +22,8 @@
 #ifndef METS_TERMINATION_CRITERIA_HH_
 #define METS_TERMINATION_CRITERIA_HH_
 
+#include <metslib/mets_macros.hh>
+
 namespace mets {
  
   /// @defgroup common Termination criteria
@@ -221,7 +223,7 @@ namespace mets {
   public:
     forever() : termination_criteria_chain() {}
     bool 
-    operator()(const feasible_solution& fs)
+    operator()(const feasible_solution& UNUSED(fs) )
     { return false; }
     void reset() 
     { termination_criteria_chain::reset(); }

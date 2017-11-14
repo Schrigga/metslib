@@ -22,6 +22,8 @@
 #ifndef METS_SIMULATED_ANNEALING_HH_
 #define METS_SIMULATED_ANNEALING_HH_
 
+#include <metslib/mets_macros.hh>
+
 namespace mets {
 
   /// @defgroup simulated_annealing Simulated Annealing
@@ -154,7 +156,7 @@ namespace mets {
       : abstract_cooling_schedule(), factor_m(alpha) 
     { if(alpha >= 1) throw std::runtime_error("alpha must be < 1"); }
     double
-    operator()(double temp, feasible_solution& fs)
+    operator()(double temp, feasible_solution& UNUSED(fs) )
     { return temp*factor_m; }
   protected:
     double factor_m;
@@ -169,7 +171,7 @@ namespace mets {
       : abstract_cooling_schedule(), decrement_m(delta)
     { if(delta <= 0) throw std::runtime_error("delta must be > 0"); }
     double
-    operator()(double temp, feasible_solution& fs)
+    operator()(double temp, feasible_solution& UNUSED(fs) )
     { return std::max(0.0, temp-decrement_m); }
   protected:
     double decrement_m;

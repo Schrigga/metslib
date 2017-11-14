@@ -22,6 +22,8 @@
 #ifndef METS_MODEL_HH_
 #define METS_MODEL_HH_
 
+#include <metslib/mets_macros.hh>
+
 namespace mets {
 
   /// @brief Type of the objective/cost function.
@@ -95,7 +97,7 @@ namespace mets {
     virtual 
     ~printable() {}
     virtual void 
-    print(std::ostream& os) const { };
+    print(std::ostream& UNUSED(os) ) const { };
   };
 
   /// @defgroup model Model
@@ -641,7 +643,7 @@ namespace mets {
     }
     
     /// @brief Use the same set set of moves at each iteration.
-    void refresh(const mets::feasible_solution& s) { }
+    void refresh(const mets::feasible_solution& UNUSED(s) ) { }
     
   };
 
@@ -667,7 +669,7 @@ namespace mets {
 
     /// @brief This is a static neighborhood
     void 
-    refresh(const mets::feasible_solution& s) 
+    refresh(const mets::feasible_solution& UNUSED(s) ) 
     { }
 
   };

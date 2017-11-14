@@ -28,6 +28,7 @@ metslib/abstract-search.hh -text
 metslib/local-search.hh -text
 metslib/mets.hh -text
 metslib/metslib_config.hh -text
+metslib/metslib_macros.hh -text
 metslib/model.hh -text
 metslib/observer.hh -text
 metslib/simulated-annealing.hh -text
