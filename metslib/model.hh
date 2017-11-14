@@ -505,13 +505,13 @@ namespace mets {
     refresh(const mets::feasible_solution& s) = 0;
     
     /// @brief Iterator type to iterate over moves of the neighborhood
-    typedef std::deque<const move*>::iterator iterator;
+    typedef std::deque<move*>::iterator iterator;
     
     /// @brief const Iterator type to iterate over moves of the neighborhood
-    typedef std::deque<const move*>::const_iterator const_iterator;
+    typedef std::deque<move*>::const_iterator const_iterator;
     
     /// @brief Size type
-    typedef std::deque<const move*>::size_type size_type;
+    typedef std::deque<move*>::size_type size_type;
 
     /// @brief Begin iterator of available moves queue.
     iterator begin() 
@@ -534,7 +534,7 @@ namespace mets {
     { return moves_m.size(); }
 
   protected:
-    std::deque<const move*> moves_m; ///< The moves queue
+    std::deque<move*> moves_m; ///< The moves queue
     move_manager(const move_manager&);
   };
   
@@ -602,7 +602,7 @@ namespace mets {
   void
   mets::swap_neighborhood<random_generator>::refresh(const mets::feasible_solution& s)
   {
-    permutation_problem& sol = dynamic_cast<permutation_problem&>(s);
+    const permutation_problem& sol = dynamic_cast<const permutation_problem&>(s);
     iterator ii = begin();
     
     // the first n are simple qap_moveS
@@ -673,7 +673,7 @@ namespace mets {
 
     /// @brief Dtor.
     ~invert_full_neighborhood() { 
-      for(std::deque<const move*>::iterator it = moves_m.begin(); 
+      for(std::deque<move*>::iterator it = moves_m.begin(); 
 	  it != moves_m.end(); ++it)
 	delete *it;
     }
