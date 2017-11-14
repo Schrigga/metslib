@@ -507,6 +507,9 @@ namespace mets {
     /// @brief Iterator type to iterate over moves of the neighborhood
     typedef std::deque<const move*>::iterator iterator;
     
+    /// @brief const Iterator type to iterate over moves of the neighborhood
+    typedef std::deque<const move*>::const_iterator const_iterator;
+    
     /// @brief Size type
     typedef std::deque<const move*>::size_type size_type;
 
@@ -514,8 +517,16 @@ namespace mets {
     iterator begin() 
     { return moves_m.begin(); }
 
+    /// @brief const Begin iterator of available moves queue.
+    const_iterator begin() const
+    { return moves_m.begin(); }
+
     /// @brief End iterator of available moves queue.
     iterator end() 
+    { return moves_m.end(); }
+
+    /// @brief const End iterator of available moves queue.
+    const_iterator end() const
     { return moves_m.end(); }
 
     /// @brief Size of the neighborhood.
