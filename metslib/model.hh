@@ -269,6 +269,7 @@ void random_shuffle(permutation_problem& p, random_generator& rng)
 	// @ESCHRICKER
 
 	std::shuffle(p.pi_m.begin(), p.pi_m.end(), rng );
+	p.update_cost();
 
 #else
     std::tr1::uniform_int<size_t> unigen;
