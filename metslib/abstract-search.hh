@@ -3,10 +3,9 @@
 // the CPL 1.0 as published by the Open Source Initiative
 // http://www.opensource.org/licenses/cpl1.0.php
 
-#include <iostream>
+#pragma once
 
-#ifndef METS_ABSTRACT_SEARCH_HH_
-#define METS_ABSTRACT_SEARCH_HH_
+#include <iostream>
 
 namespace mets {
 
@@ -345,5 +344,3 @@ mets::best_ever_solution::accept(const mets::feasible_solution& sol)
     }
     return false;
 }
-
-#endif

@@ -90,8 +90,7 @@
 /// from the mets::mana_move base class and implement the pure virtual
 /// methods.
 ///
-#ifndef METS_METS_HH_
-#define METS_METS_HH_
+#pragma once 
 
 #include "metslib_config.hh"
 
@@ -142,4 +141,3 @@ operator<<(std::ostream& os, const mets::printable& p)
     return os;
 }
 
-#endif

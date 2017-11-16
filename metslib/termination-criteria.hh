@@ -19,8 +19,7 @@
 // the CPL 1.0 as published by the Open Source Initiative
 // http://www.opensource.org/licenses/cpl1.0.php
 
-#ifndef METS_TERMINATION_CRITERIA_HH_
-#define METS_TERMINATION_CRITERIA_HH_
+#pragma once
 
 #include <metslib/mets_macros.hh>
 
@@ -289,4 +288,3 @@ mets::noimprove_termination_criteria::operator()(const feasible_solution& fs)
     return termination_criteria_chain::operator()(fs);
 }
 
-#endif

@@ -19,8 +19,7 @@
 // the CPL 1.0 as published by the Open Source Initiative
 // http://www.opensource.org/licenses/cpl1.0.php
 
-#ifndef METS_TABU_SEARCH_HH_
-#define METS_TABU_SEARCH_HH_
+#pragma once
 
 namespace mets {
 
@@ -632,5 +631,3 @@ mets::best_ever_criteria::operator()(const feasible_solution& fs,
     else
         return aspiration_criteria_chain::operator()(fs, mov, eval);
 }
-
-#endif

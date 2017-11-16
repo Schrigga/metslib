@@ -21,8 +21,7 @@
 // the CPL 1.0 as published by the Open Source Initiative
 // http://www.opensource.org/licenses/cpl1.0.php
 
-#ifndef METS_OBSERVER_HH_
-#define METS_OBSERVER_HH_
+#pragma once 
 
 #include <set>
 #include <algorithm>
@@ -160,5 +159,3 @@ subject<observed_subject>::notify()
 }
 
 }
-
-#endif // METS_OBSERVER_HH_

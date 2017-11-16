@@ -20,8 +20,7 @@
 // the CPL 1.0 as published by the Open Source Initiative
 // http://www.opensource.org/licenses/cpl1.0.php
 
-#ifndef LOCAL_SEARCH_HH_
-#define LOCAL_SEARCH_HH_
+#pragma once
 
 namespace mets {
 /// @defgroup local_search Local Search
@@ -136,4 +135,3 @@ mets::local_search<move_manager_t>::search()
 
     } while(best_movit != base_t::moves_m.end());
 }
-#endif

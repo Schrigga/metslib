@@ -19,8 +19,7 @@
 // the CPL 1.0 as published by the Open Source Initiative
 // http://www.opensource.org/licenses/cpl1.0.php
 
-#ifndef METS_MODEL_HH_
-#define METS_MODEL_HH_
+#pragma once
 
 #include <metslib/mets_macros.hh>
 
@@ -849,4 +848,3 @@ mets::invert_subsequence::operator==(const mets::mana_move& o) const
     }
 }
 
-#endif

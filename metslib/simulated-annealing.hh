@@ -19,8 +19,7 @@
 // the CPL 1.0 as published by the Open Source Initiative
 // http://www.opensource.org/licenses/cpl1.0.php
 
-#ifndef METS_SIMULATED_ANNEALING_HH_
-#define METS_SIMULATED_ANNEALING_HH_
+#pragma once
 
 #include <metslib/mets_macros.hh>
 
@@ -264,4 +263,3 @@ mets::simulated_annealing<move_manager_t>::search()
             cooling_schedule_m(current_temp_m, base_t::working_solution_m);
     }
 }
-#endif

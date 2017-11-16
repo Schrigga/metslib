@@ -1,5 +1,5 @@
-#ifndef METSLIB_CONFIG_HH_
-#define METSLIB_CONFIG_HH_
+#pragma once
+
 #ifdef HAVE_CONFIG_H
 #  ifndef METSLIB_TESTING
 #    include "metslib_ah.hh"
@@ -15,5 +15,4 @@
 #  else
 #    define METSLIB_HAVE_TR1_UNORDERED_MAP 1
 #  endif
-#endif
 #endif
