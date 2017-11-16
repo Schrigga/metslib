@@ -105,9 +105,11 @@ public:
     ///
     /// An exception mets::no_moves_error can be risen when no move is
     /// possible.
+    //
+    // @ESCHRICKER
     virtual void
-    search()
-    throw(no_moves_error) = 0;
+    search() = 0;
+//    throw(no_moves_error) = 0;
 
     /// @brief The solution recorder instance.
     const solution_recorder&

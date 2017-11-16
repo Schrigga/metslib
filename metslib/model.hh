@@ -24,6 +24,9 @@
 
 #include <metslib/mets_macros.hh>
 
+#include <random>
+#include <functional>
+
 namespace mets {
 
 /// @brief Type of the objective/cost function.
@@ -260,16 +263,21 @@ template<typename random_generator>
 void random_shuffle(permutation_problem& p, random_generator& rng)
 {
 #if defined (METSLIB_HAVE_UNORDERED_MAP) && !defined (METSLIB_TR1_MIXED_NAMESPACE)
-    std::uniform_int<size_t> unigen;
+/*    std::uniform_int<size_t> unigen;
     std::variate_generator<random_generator&,
         std::uniform_int<size_t> >gen(rng, unigen);
+	*/
+	// @ESCHRICKER
+
+	std::shuffle(p.pi_m.begin(), p.pi_m.end(), rng );
+
 #else
     std::tr1::uniform_int<size_t> unigen;
     std::tr1::variate_generator<random_generator&,
         std::tr1::uniform_int<size_t> >gen(rng, unigen);
-#endif
     std::random_shuffle(p.pi_m.begin(), p.pi_m.end(), gen);
     p.update_cost();
+#endif
 }
 
 /// @brief Perturbate a problem with n swap moves.
@@ -279,7 +287,11 @@ template<typename random_generator>
 void perturbate(permutation_problem& p, unsigned int n, random_generator& rng)
 {
 #if defined (METSLIB_HAVE_UNORDERED_MAP) && !defined (METSLIB_TR1_MIXED_NAMESPACE)
-    std::uniform_int<> int_range;
+//    std::uniform_int<> int_range;
+//
+//    @ESCHRICKER
+    
+	std::uniform_int_distribution<> int_range;
 #else
     std::tr1::uniform_int<> int_range;
 #endif
@@ -610,7 +622,10 @@ public:
 protected:
     random_generator& rng;
 #if defined (METSLIB_HAVE_UNORDERED_MAP) && !defined (METSLIB_TR1_MIXED_NAMESPACE)
-    std::uniform_int<> int_range;
+//    std::uniform_int<> int_range;
+//
+//    @ESCHRICKER
+    std::uniform_int_distribution<> int_range;
 #else
     std::tr1::uniform_int<> int_range;
 #endif
@@ -661,10 +676,21 @@ void
 mets::swap_neighborhood<random_generator
 >::randomize_move(swap_elements& m, unsigned int size)
 {
-    int p1 = int_range(rng, size);
+//  @ESCHRICKER
+    if( static_cast<unsigned int>(int_range.max()) != size -1 ) {
+	int_range = std::uniform_int_distribution<>( 0, size-1 );
+    }
+
+    int p1 = int_range( rng );
+    int p2 = int_range( rng );
+
+    while(p1 == p2 )
+	    p2 = int_range(rng );
+
+/*    int p1 = int_range(rng, size);
     int p2 = int_range(rng, size);
     while(p1 == p2)
-        p2 = int_range(rng, size);
+        p2 = int_range(rng, size); */
     // we are friend, so we know how to handle the nuts&bolts of
     // swap_elements
     m.p1 = std::min(p1,p2);

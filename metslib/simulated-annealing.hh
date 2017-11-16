@@ -110,9 +110,11 @@ public:
     ///
     /// Remember that this is a minimization process.
     ///
+    //
+    // @ESCHRICKER
     virtual void
-    search()
-    throw(no_moves_error);
+    search();
+//    throw(no_moves_error);
 
     /// @brief The current annealing temperature.
     ///
@@ -140,9 +142,13 @@ protected:
     double current_temp_m;
     double K_m;
 #if defined (METSLIB_HAVE_UNORDERED_MAP) && !defined (METSLIB_TR1_MIXED_NAMESPACE)
-    std::uniform_real<double> ureal;
+//  @ESCHRICKER
+//    std::uniform_real<double> ureal;
+    std::uniform_real_distribution<double> ureal;
     std::mt19937 rng;
-    std::variate_generator< std::mt19937, std::uniform_real<double> > gen;
+//  @ESCHRICKER
+//    std::variate_generator< std::mt19937, std::uniform_real<double> > gen;
+    std::function<double()> gen;
 #else
     std::tr1::uniform_real<double> ureal;
     std::tr1::mt19937 rng;
@@ -210,10 +216,11 @@ simulated_annealing(evaluable_solution& working,
 {
 }
 
+// @ESCHRICKER
 template<typename move_manager_t>
 void
 mets::simulated_annealing<move_manager_t>::search()
-throw(no_moves_error)
+//throw(no_moves_error)
 {
     typedef abstract_search<move_manager_t> base_t;
 

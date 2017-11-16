@@ -66,9 +66,11 @@ public:
     /// move_manager_type than enumerates all feasible
     /// moves.
     ///
+    //
+    // @ESCHRICKER
     virtual void
-    search()
-    throw(no_moves_error);
+    search();
+//    throw(no_moves_error);
 
 protected:
     bool short_circuit_m;
@@ -92,10 +94,11 @@ mets::local_search<move_manager_t>::local_search(evaluable_solution& working,
     base_t::step_m = 0;
 }
 
+// @ESCHRICKER
 template<typename move_manager_t>
 void
 mets::local_search<move_manager_t>::search()
-throw(no_moves_error)
+//throw(no_moves_error)
 {
     typedef abstract_search<move_manager_t> base_t;
     typename move_manager_t::iterator best_movit;
