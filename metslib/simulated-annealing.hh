@@ -140,7 +140,6 @@ protected:
     double stop_temp_m;
     double current_temp_m;
     double K_m;
-#if defined (METSLIB_HAVE_UNORDERED_MAP) && !defined (METSLIB_TR1_MIXED_NAMESPACE)
 //  @ESCHRICKER
 //    std::uniform_real<double> ureal;
     std::uniform_real_distribution<double> ureal;
@@ -148,12 +147,6 @@ protected:
 //  @ESCHRICKER
 //    std::variate_generator< std::mt19937, std::uniform_real<double> > gen;
     std::function<double()> gen;
-#else
-    std::tr1::uniform_real<double> ureal;
-    std::tr1::mt19937 rng;
-    std::tr1::variate_generator< std::tr1::mt19937,
-        std::tr1::uniform_real<double> > gen;
-#endif
 };
 
 /// @brief Original ECS proposed by Kirkpatrick

@@ -105,16 +105,8 @@
 #include <iostream>
 #include <stdexcept>
 #include <algorithm>
-#if defined (METSLIB_HAVE_UNORDERED_MAP)
-#  include <unordered_map>
-#  include <random>
-#elif defined (METSLIB_HAVE_TR1_UNORDERED_MAP)
-#  include <tr1/unordered_map>
-#  include <tr1/random>
-#else
-#  error "Unable to find unordered_map header file. Please use a recent C++ compiler supporting TR1 extension."
-#endif
-
+#include <unordered_map>
+#include <random>
 
 ///
 /// @brief METSlib Metaheuristic framework namespace.

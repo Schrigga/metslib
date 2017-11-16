@@ -325,19 +325,11 @@ public:
 
 protected:
     typedef std::deque<const move*> move_list_type;
-#if defined (METSLIB_HAVE_UNORDERED_MAP) && !defined (METSLIB_TR1_MIXED_NAMESPACE)
     typedef std::unordered_map<
     const mana_move*, // Key type
           int, //insert a move and the number of times it's present in the list
           mana_move_hash,
           dereferenced_equal_to<const mana_move*> > move_map_type;
-#else
-    typedef std::tr1::unordered_map<
-    const mana_move*, // Key type
-          int, //insert a move and the number of times it's present in the list
-          mana_move_hash,
-          dereferenced_equal_to<const mana_move*> > move_map_type;
-#endif
     move_list_type tabu_moves_m;
     move_map_type tabu_hash_m;
 };

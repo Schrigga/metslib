@@ -261,23 +261,16 @@ protected:
 template<typename random_generator>
 void random_shuffle(permutation_problem& p, random_generator& rng)
 {
-#if defined (METSLIB_HAVE_UNORDERED_MAP) && !defined (METSLIB_TR1_MIXED_NAMESPACE)
 /*    std::uniform_int<size_t> unigen;
     std::variate_generator<random_generator&,
         std::uniform_int<size_t> >gen(rng, unigen);
+    std::random_shuffle(p.pi_m.begin(), p.pi_m.end(), gen);
+    p.update_cost();
 	*/
 	// @ESCHRICKER
 
 	std::shuffle(p.pi_m.begin(), p.pi_m.end(), rng );
 	p.update_cost();
-
-#else
-    std::tr1::uniform_int<size_t> unigen;
-    std::tr1::variate_generator<random_generator&,
-        std::tr1::uniform_int<size_t> >gen(rng, unigen);
-    std::random_shuffle(p.pi_m.begin(), p.pi_m.end(), gen);
-    p.update_cost();
-#endif
 }
 
 /// @brief Perturbate a problem with n swap moves.
@@ -286,15 +279,12 @@ void random_shuffle(permutation_problem& p, random_generator& rng)
 template<typename random_generator>
 void perturbate(permutation_problem& p, unsigned int n, random_generator& rng)
 {
-#if defined (METSLIB_HAVE_UNORDERED_MAP) && !defined (METSLIB_TR1_MIXED_NAMESPACE)
 //    std::uniform_int<> int_range;
 //
 //    @ESCHRICKER
     
-	std::uniform_int_distribution<> int_range;
-#else
-    std::tr1::uniform_int<> int_range;
-#endif
+    std::uniform_int_distribution<> int_range;
+
     for(unsigned int ii=0; ii!=n; ++ii)
     {
         int p1 = int_range(rng, p.size());
@@ -593,11 +583,7 @@ protected:
 
 
 /// @brief Generates a stochastic subset of the neighborhood.
-#if defined (METSLIB_HAVE_UNORDERED_MAP) && !defined (METSLIB_TR1_MIXED_NAMESPACE)
 template<typename random_generator = std::minstd_rand0>
-#else
-template<typename random_generator = std::tr1::minstd_rand0>
-#endif
 class swap_neighborhood : public mets::move_manager
 {
 public:
@@ -621,14 +607,10 @@ public:
 
 protected:
     random_generator& rng;
-#if defined (METSLIB_HAVE_UNORDERED_MAP) && !defined (METSLIB_TR1_MIXED_NAMESPACE)
 //    std::uniform_int<> int_range;
 //
 //    @ESCHRICKER
     std::uniform_int_distribution<> int_range;
-#else
-    std::tr1::uniform_int<> int_range;
-#endif
     unsigned int n;
 
     void randomize_move(swap_elements& m, unsigned int size);
