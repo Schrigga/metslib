@@ -395,7 +395,8 @@ public:
     /// @brief Virtual method that applies the move on a point
     gol_type
     evaluate(const mets::feasible_solution& s) const
-    {   const permutation_problem& sol =
+    {   
+        const permutation_problem& sol =
             static_cast<const permutation_problem&>(s);
         return sol.cost_function() + sol.evaluate_swap(p1, p2);
     }
@@ -438,8 +439,9 @@ protected:
     int p1; ///< the first element to swap
     int p2; ///< the second element to swap
 
-    template <typename>
-    friend class swap_neighborhood;
+    // @ESCHRICKER
+   /* template <typename>
+    friend class swap_neighborhood;*/
 };
 
 /// @brief A mets::mana_move that swaps a subsequence of elements in
@@ -660,7 +662,7 @@ mets::swap_neighborhood<random_generator
 {
 //  @ESCHRICKER
     if( static_cast<unsigned int>(int_range.max()) != size -1 ) {
-	int_range = std::uniform_int_distribution<>( 0, size-1 );
+	    int_range = std::uniform_int_distribution<>( 0, size-1 );
     }
 
     int p1 = int_range( rng );
@@ -675,8 +677,13 @@ mets::swap_neighborhood<random_generator
         p2 = int_range(rng, size); */
     // we are friend, so we know how to handle the nuts&bolts of
     // swap_elements
-    m.p1 = std::min(p1,p2);
-    m.p2 = std::max(p1,p2);
+
+    // @ESCHRICKER
+    /*m.p1 = std::min(p1,p2);
+    m.p2 = std::max(p1,p2);*/
+
+    m.change(p1, p2);
+
 }
 
 /// @brief Generates a the full swap neighborhood.

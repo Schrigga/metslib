@@ -396,6 +396,9 @@ void mets::tabu_search<move_manager_t>::search()
         base_t::step_m = base_t::ITERATION_BEGIN;
         this->notify();
 
+        /*
+            @ESCHRICKER: refresh creates a new random sequence of n moves
+         */
         base_t::moves_m.refresh(base_t::working_solution_m);
 
         typename move_manager_t::iterator best_movit = base_t::moves_m.end();
