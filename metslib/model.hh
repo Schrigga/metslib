@@ -195,8 +195,10 @@ public:
     /// @brief: Compute cost of the whole solution.
     ///
     /// You will need to override this one.
-    virtual gol_type
-    compute_cost() const = 0;
+    virtual gol_type compute_cost() const = 0;
+
+    // @ESCHRICKER: to evaluate fast other permutations for the problem
+    virtual gol_type compute_cost( const std::vector<int>& ) const = 0;
 
     /// @brief: Evaluate a swap.
     ///

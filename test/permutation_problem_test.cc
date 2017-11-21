@@ -21,6 +21,7 @@ public:
   mets::gol_type cost_function() const;
 
   mets::gol_type compute_cost() const  { return 0.0; }
+  mets::gol_type compute_cost( const std::vector<int>& ) const  { return 0.0; }
   mets::gol_type evaluate_swap(int i, int j) const { return 0.0; }
   friend int main();
 };
