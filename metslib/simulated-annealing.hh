@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include <functional>
+
 #include <metslib/mets_macros.hh>
 
 namespace mets {
@@ -190,6 +192,7 @@ protected:
 /// @}
 }
 
+// @ESCHRICKER: added bind
 template<typename move_manager_t>
 mets::simulated_annealing<move_manager_t>::
 simulated_annealing(evaluable_solution& working,
@@ -204,7 +207,7 @@ simulated_annealing(evaluable_solution& working,
       termination_criteria_m(tc), cooling_schedule_m(cs),
       starting_temp_m(starting_temp), stop_temp_m(stop_temp),
       current_temp_m(), K_m(K),
-      ureal(0.0,1.0), rng(), gen(rng, ureal)
+      ureal(0.0,1.0), rng(), gen( std::bind(ureal, rng ) )
 {
 }
 
@@ -223,9 +226,9 @@ mets::simulated_annealing<move_manager_t>::search()
         gol_type actual_cost =
             static_cast<mets::evaluable_solution&>(base_t::working_solution_m)
             .cost_function();
-        gol_type best_cost =
+     /*   gol_type best_cost =
             static_cast<mets::evaluable_solution&>(base_t::working_solution_m)
-            .cost_function();
+            .cost_function();*/
 
         base_t::moves_m.refresh(base_t::working_solution_m);
         for(typename move_manager_t::iterator movit = base_t::moves_m.begin();
@@ -233,9 +236,10 @@ mets::simulated_annealing<move_manager_t>::search()
         {
             // apply move and record proposed cost function
             gol_type cost = (*movit)->evaluate(base_t::working_solution_m);
+            
+            double delta = static_cast<double>(cost-actual_cost);
 
-            double delta = ((double)(cost-actual_cost));
-            if(delta < 0 || gen() < exp(-delta/(K_m*current_temp_m)))
+            if(delta < 0 || gen() < std::min(1.0, exp(-delta/(K_m*current_temp_m))))
             {
                 // accepted: apply, record, exit for and lower temperature
                 (*movit)->apply(base_t::working_solution_m);
@@ -248,6 +252,7 @@ mets::simulated_annealing<move_manager_t>::search()
                 }
                 base_t::step_m = base_t::MOVE_MADE;
                 this->notify();
+
                 break;
             }
         } // end for each move
