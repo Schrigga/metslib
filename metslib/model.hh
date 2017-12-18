@@ -248,6 +248,9 @@ public:
         std::swap(pi_m[i], pi_m[j]);
     }
 
+		std::vector<int>& getPi(){
+			return pi_m;
+		}
 
 protected:
     std::vector<int> pi_m;
