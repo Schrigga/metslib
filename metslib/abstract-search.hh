@@ -48,8 +48,35 @@ public:
 /// @brief An abstract search.
 ///
 /// @see mets::tabu_search, mets::simulated_annealing, mets::local_search
+class very_abstract_search 
+{
+public:
+	very_abstract_search( feasible_solution& working ): working_solution_m( working )
+	{}
+
+    /// @brief The current working solution.
+    const feasible_solution&
+    working() const
+    {
+        return working_solution_m;
+    }
+
+    feasible_solution&
+    working()
+    {
+        return working_solution_m;
+    }
+
+    virtual void
+    search() = 0;
+
+protected:
+	feasible_solution& working_solution_m;
+};
+
+
 template<typename move_manager_type>
-class abstract_search : public subject< abstract_search<move_manager_type> >
+class abstract_search : public subject< abstract_search<move_manager_type> >, public very_abstract_search
 {
 public:
     /// @brief Set some common values needed for neighborhood based
@@ -68,8 +95,9 @@ public:
                     solution_recorder& recorder,
                     move_manager_type& moveman)
         : subject<abstract_search<move_manager_type> >(),
+					very_abstract_search(working), 
           solution_recorder_m(recorder),
-          working_solution_m(working),
+         // working_solution_m(working),
           moves_m(moveman),
           current_move_m(),
           step_m()
@@ -106,8 +134,8 @@ public:
     /// possible.
     //
     // @ESCHRICKER
-    virtual void
-    search() = 0;
+//    virtual void
+//    search() = 0;
 //    throw(no_moves_error) = 0;
 
     /// @brief The solution recorder instance.
@@ -117,6 +145,7 @@ public:
         return solution_recorder_m;
     };
 
+/*
     /// @brief The current working solution.
     const feasible_solution&
     working() const
@@ -129,6 +158,7 @@ public:
     {
         return working_solution_m;
     }
+*/
 
     /// @brief The last move made
     const move&
@@ -172,7 +202,8 @@ public:
 
 protected:
     solution_recorder& solution_recorder_m;
-    feasible_solution& working_solution_m;
+//    feasible_solution& working_solution_m;
+		using very_abstract_search::working_solution_m;
     move_manager_type& moves_m;
     typename move_manager_type::iterator current_move_m;
     int step_m;
