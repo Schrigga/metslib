@@ -162,6 +162,10 @@ public:
         return tenure_m;
     }
 
+    /* @ESCHRICKER: clear the tabu list */
+    virtual void
+    clear(){}
+
     ///
     /// @brief Tenure of this tabu list.
     ///
@@ -322,6 +326,9 @@ public:
     /// tenure iterations
     bool
     is_tabu(const feasible_solution& sol, const move& mov) const;
+
+    /* @ESCHRICKER */
+    void clear();
 
 protected:
     typedef std::deque<const move*> move_list_type;
@@ -541,6 +548,14 @@ mets::simple_tabu_list::tabu(const feasible_solution& sol, const move& mov)
         tabu_moves_m.pop_front();
     }
     tabu_list_chain::tabu(sol, mov);
+}
+
+inline void 
+mets::simple_tabu_list::clear()
+{
+	tabu_moves_m.clear();
+	tabu_hash_m.clear();
+	tabu_list_chain::clear();
 }
 
 inline bool
