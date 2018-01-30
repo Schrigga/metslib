@@ -198,7 +198,7 @@ public:
     virtual gol_type compute_cost() const = 0;
 
     // @ESCHRICKER: to evaluate fast other permutations for the problem
-    virtual gol_type compute_cost( const std::vector<int>& ) const = 0;
+//    virtual gol_type compute_cost( const std::vector<int>& ) const = 0;
 
     /// @brief: Evaluate a swap.
     ///
@@ -403,7 +403,9 @@ public:
     {   
         const permutation_problem& sol =
             static_cast<const permutation_problem&>(s);
-        return sol.cost_function() + sol.evaluate_swap(p1, p2);
+        //return sol.cost_function() + sol.evaluate_swap(p1, p2);
+	// @ESCHRICKER just using the evaluate value for comparison, all compared values use the same sol.cost_function() value
+        return sol.evaluate_swap(p1, p2);
     }
 
     /// @brief Virtual method that applies the move on a point
@@ -667,7 +669,9 @@ mets::swap_neighborhood<random_generator
 {
 //  @ESCHRICKER
     if( static_cast<unsigned int>(int_range.max()) != size -1 ) {
+	    std::cout << "changing randomized move" << std::endl;
 	    int_range = std::uniform_int_distribution<>( 0, size-1 );
+//	    std::cin >> size;
     }
 
     int p1 = int_range( rng );
@@ -675,6 +679,7 @@ mets::swap_neighborhood<random_generator
 
     while(p1 == p2 )
 	    p2 = int_range(rng );
+
 
 /*    int p1 = int_range(rng, size);
     int p2 = int_range(rng, size);

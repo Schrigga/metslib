@@ -397,6 +397,15 @@ void mets::tabu_search<move_manager_t>::search()
 //throw(no_moves_error)
 {
     typedef abstract_search<move_manager_t> base_t;
+
+//	std::cout << "initial solution: " << std::endl;
+//	for(auto d: dynamic_cast<permutation_problem&>( base_t::working_solution_m ).getPi() ) {
+//		std::cout << d << " ";
+//	}
+
+//	int asd;
+//	std::cin >> asd;
+
     while(!termination_criteria_m(base_t::working_solution_m))
     {
         // call listeners
@@ -416,7 +425,7 @@ void mets::tabu_search<move_manager_t>::search()
         {
             // evaluate proposed move
             gol_type cost = (*movit)->evaluate(base_t::working_solution_m);
-
+//	    std::cout << "diff: " << cost << std::endl;
             // save tabu status
             bool is_tabu = tabu_list_m.is_tabu(base_t::working_solution_m,
                                                **movit);
@@ -443,6 +452,7 @@ void mets::tabu_search<move_manager_t>::search()
                     best_movit = base_t::current_move_m = movit;
                     if(aspiration_criteria_met)
                     {
+//			    std::cout << "besser gefunden" << std::endl;
                         base_t::step_m = ASPIRATION_CRITERIA_MET;
                         this->notify();
                     }
@@ -458,7 +468,16 @@ void mets::tabu_search<move_manager_t>::search()
 
         // do the best non tabu move (unless overridden by aspiration
         // criteria, of course)
+	
+//	std::cout << "Costs before: " << dynamic_cast<mets::permutation_problem&>(base_t::working_solution_m).cost_function() << std::endl;
         (*best_movit)->apply(base_t::working_solution_m);
+//	std::cout << "Costs after: " << dynamic_cast<mets::permutation_problem&>(base_t::working_solution_m).cost_function() << std::endl;
+
+//	std::cout << "Compute_Cost directly called: " << dynamic_cast<mets::permutation_problem&>(base_t::working_solution_m).compute_cost() << std::endl;
+//	std::cout << "Best move costs: " << best_move_cost << std::endl;
+//	dynamic_cast<permutation_problem&>(base_t::working_solution_m).update_cost();
+//	std::cout << "Cost after update: " << dynamic_cast<mets::permutation_problem&>(base_t::working_solution_m).cost_function() << std::endl;
+
 
         // call listeners
         base_t::step_m = base_t::MOVE_MADE;
